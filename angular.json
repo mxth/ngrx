@@ -2,7 +2,43 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "ngrx": {
+      "root": "libs/ngrx",
+      "sourceRoot": "libs/ngrx/src",
+      "projectType": "library",
+      "prefix": "mxth",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/ngrx/tsconfig.lib.json",
+            "project": "libs/ngrx/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ngrx/tsconfig.lib.json",
+              "libs/ngrx/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/ngrx/jest.config.js",
+            "tsConfig": "libs/ngrx/tsconfig.spec.json",
+            "setupFile": "libs/ngrx/src/test-setup.ts"
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
@@ -10,5 +46,6 @@
     },
     "defaultCollection": "@nrwl/schematics",
     "packageManager": "yarn"
-  }
+  },
+  "defaultProject": "ngrx"
 }

@@ -1,0 +1,11 @@
+{
+  "name": "@mxth/ngrx",
+  "version": "6.1.0",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "@ngrx/store": "^6.0.0",
+    "@ngrx/effects": "^6.0.0",
+    "rxjs": "^6.0.0"
+  }
+}

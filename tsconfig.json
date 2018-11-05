@@ -16,6 +16,9 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@mxth/ngrx": [
+        "libs/ngrx/src/index.ts"
+      ]
     }
   },
   "exclude": [

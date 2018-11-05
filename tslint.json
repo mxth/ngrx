@@ -4,6 +4,14 @@
     "node_modules/@nrwl/schematics/src/tslint"
   ],
   "rules": {
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "ordered-imports": [
+      true,
+      { "named-imports-order": "lowercase-last" }
+    ],
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
