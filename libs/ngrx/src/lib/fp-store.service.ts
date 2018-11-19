@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { Actions } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
-import { EMPTY, Observable, defer, merge, of } from 'rxjs'
+import { EMPTY, Observable, defer, merge, of, throwError } from 'rxjs'
 import { filter, first, flatMap, tap } from 'rxjs/operators'
-import { Action, RequestAction, ResponseAction } from './action'
+import { Action, ActionClass, RequestAction, ResponseAction, isAction } from './action'
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +18,22 @@ export class FpStore<S> {
     )
   }
 
-  dispatchRequest<T extends RequestAction, P>(action: T): Observable<ResponseAction<any>> {
+  dispatchRequest<T extends RequestAction, K>(action: T, Success: ActionClass<ResponseAction<K>>, Error?: ActionClass<ResponseAction<any>>): Observable<K> {
     const isResponseAction = (requestId: number) => (a: any) => (<ResponseAction<any>>a).responseId === requestId
 
     return of(action).pipe(
       flatMap(a => merge(
         this.action$.pipe(
           filter(isResponseAction(a.requestId)),
+          flatMap(_a => {
+            if (isAction(_a, Success)) {
+              return of(_a.payload)
+            }
+            if (Error && isAction(_a, Error)) {
+              return throwError(_a.payload)
+            }
+            return throwError(`[dispatchRequest] unrecognized action ${_a.toString()}`)
+          })
         ),
         defer(() => {
           this.store.dispatch(a)
