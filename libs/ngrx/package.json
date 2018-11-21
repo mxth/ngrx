@@ -1,6 +1,6 @@
 {
   "name": "@mxth/ngrx",
-  "version": "6.6.0",
+  "version": "6.6.1",
   "peerDependencies": {
     "@angular/core": "^6.0.0 || ^7.0.0",
     "@ngrx/store": "^6.0.0 || ^7.0.0",

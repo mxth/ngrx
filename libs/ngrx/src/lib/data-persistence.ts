@@ -5,7 +5,6 @@ import { DataPersistence as NxDataPersistence } from '@nrwl/nx'
 import {
   FetchOpts,
   OptimisticUpdateOpts,
-  PessimisticUpdateOpts,
 } from '@nrwl/nx/src/data-persistence'
 import { Observable } from 'rxjs'
 import { Action, ActionClass, ActionType } from './action'
@@ -15,6 +14,11 @@ export class UnhandledException extends Action {
   constructor(public payload: any) {
     super()
   }
+}
+
+export interface PessimisticUpdateOpts<T, A> {
+  run(a: A, state?: T): Observable<Action> | Action | void
+  onError?(a: A, e: any): Observable<any> | any
 }
 
 @Injectable({
