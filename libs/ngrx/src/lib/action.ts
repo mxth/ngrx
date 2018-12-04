@@ -32,8 +32,8 @@ export function ActionType(type: string) {
   }
 }
 
-export function isAction<T extends Action, P = any>(
-  action: Action,
+export function isAction<T extends Action>(
+  action: any,
   actionClass: ActionClass<T>,
 ): action is T {
   return action.type === actionClass.prototype.type
