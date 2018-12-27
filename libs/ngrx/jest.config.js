@@ -1,5 +1,5 @@
 module.exports = {
   name: 'ngrx',
   preset: '../../jest.config.js',
-  coverageDirectory: '../../coverage/libs/ngrx'
-};
+  coverageDirectory: '../../coverage/libs/ngrx',
+}

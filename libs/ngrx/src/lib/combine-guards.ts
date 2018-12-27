@@ -1,7 +1,9 @@
 import { Observable, of } from 'rxjs'
 import { flatMap } from 'rxjs/operators'
 
-export function combineGuards(...guards: Observable<boolean>[]): Observable<boolean> {
+export function combineGuards(
+  ...guards: Observable<boolean>[]
+): Observable<boolean> {
   const chain = (i: number): Observable<boolean> => {
     const guard: Observable<boolean> | undefined = guards[i]
     return guard

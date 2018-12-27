@@ -24,7 +24,8 @@
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "help": "./node_modules/.bin/nx help",
-    "publish:ngrx": "ng build ngrx && cd dist/libs/ngrx && yarn publish --access=public"
+    "publish:ngrx": "ng build ngrx && cd dist/libs/ngrx && yarn publish --access=public",
+    "affected": "./node_modules/.bin/nx affected"
   },
   "private": true,
   "dependencies": {
@@ -39,7 +40,7 @@
     "@ngrx/effects": "6.1.0",
     "@ngrx/router-store": "6.1.0",
     "@ngrx/store": "6.1.0",
-    "@nrwl/nx": "^7.0.2",
+    "@nrwl/nx": "^7.1.1",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
     "zone.js": "^0.8.26"
@@ -51,8 +52,8 @@
     "@angular/compiler-cli": "^7.0.0",
     "@angular/language-service": "^7.0.0",
     "@ngrx/store-devtools": "6.1.0",
-    "@nrwl/builders": "7.0.0",
-    "@nrwl/schematics": "7.0.0",
+    "@nrwl/builders": "7.1.1",
+    "@nrwl/schematics": "7.1.1",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/jest": "^23.0.0",
@@ -70,7 +71,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-packagr": "^4.2.0",
     "ngrx-store-freeze": "0.2.4",
-    "prettier": "1.13.7",
+    "prettier": "1.15.2",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tsickle": ">=0.29.0",

@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core'
 import { Actions } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
 import { DataPersistence as NxDataPersistence } from '@nrwl/nx'
-import {
-  FetchOpts,
-  OptimisticUpdateOpts,
-} from '@nrwl/nx/src/data-persistence'
+import { FetchOpts, OptimisticUpdateOpts } from '@nrwl/nx/src/data-persistence'
 import { Observable } from 'rxjs'
 import { Action, ActionClass, ActionType } from './action'
 
@@ -22,7 +19,7 @@ export interface PessimisticUpdateOpts<T, A> {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataPersistence<S> {
   store: Store<S>
@@ -38,10 +35,11 @@ export class DataPersistence<S> {
     opts: FetchOpts<S, A>,
   ): Observable<any> {
     return this.s.fetch(action.prototype.type, {
-      onError: (a, error) => new UnhandledException({
-        action: a,
-        error
-      }),
+      onError: (a, error) =>
+        new UnhandledException({
+          action: a,
+          error,
+        }),
       ...opts,
     })
   }
@@ -58,10 +56,11 @@ export class DataPersistence<S> {
     opts: PessimisticUpdateOpts<S, A>,
   ): Observable<any> {
     return this.s.pessimisticUpdate(action.prototype.type, {
-      onError: (a, error) => new UnhandledException({
-        action: a,
-        error
-      }),
+      onError: (a, error) =>
+        new UnhandledException({
+          action: a,
+          error,
+        }),
       ...opts,
     })
   }
