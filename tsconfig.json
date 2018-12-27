@@ -18,6 +18,9 @@
     "paths": {
       "@mxth/ngrx": [
         "libs/ngrx/src/index.ts"
+      ],
+      "@mxth/ui": [
+        "libs/ui/src/index.ts"
       ]
     }
   },

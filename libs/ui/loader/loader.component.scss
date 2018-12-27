@@ -1,0 +1,25 @@
+.ui-loading {
+  position: relative;
+
+  &.ui-loading-active {
+    pointer-events: none;
+    opacity: 0.7;
+
+    ui-loader mat-progress-bar {
+      display: block !important;
+    }
+  }
+}
+
+ui-loader mat-progress-bar {
+  display: none !important;
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+
+body.ui-loading ui-loader mat-progress-bar {
+  position: fixed !important;
+}

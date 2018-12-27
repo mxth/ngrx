@@ -25,15 +25,18 @@
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "help": "./node_modules/.bin/nx help",
     "publish:ngrx": "ng build ngrx && cd dist/libs/ngrx && yarn publish --access=public",
+    "publish:ui": "ng build ui && cd dist/libs/ui && yarn publish --access=public",
     "affected": "./node_modules/.bin/nx affected"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^7.0.0",
+    "@angular/cdk": "^7.2.0",
     "@angular/common": "^7.0.0",
     "@angular/compiler": "^7.0.0",
     "@angular/core": "^7.0.0",
     "@angular/forms": "^7.0.0",
+    "@angular/material": "^7.2.0",
     "@angular/platform-browser": "^7.0.0",
     "@angular/platform-browser-dynamic": "^7.0.0",
     "@angular/router": "^7.0.0",

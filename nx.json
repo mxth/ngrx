@@ -10,6 +10,9 @@
   "projects": {
     "ngrx": {
       "tags": []
+    },
+    "ui": {
+      "tags": []
     }
   }
 }
