@@ -8,26 +8,15 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
     "baseUrl": ".",
     "paths": {
-      "@mxth/ngrx": [
-        "libs/ngrx/src/index.ts"
-      ],
-      "@mxth/ui": [
-        "libs/ui/src/index.ts"
-      ]
+      "@mxth/ngrx": ["libs/ngrx/src/index.ts"],
+      "@mxth/ui": ["libs/ui/src/index.ts"],
+      "@mxth/es": ["libs/es/src/index.ts"]
     },
     "module": "es2015"
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }
