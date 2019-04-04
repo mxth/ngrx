@@ -90,6 +90,39 @@
         }
       },
       "schematics": {}
+    },
+    "fp": {
+      "root": "libs/fp",
+      "sourceRoot": "libs/fp/src",
+      "projectType": "library",
+      "prefix": "mxth",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/fp/tsconfig.lib.json",
+            "project": "libs/fp/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/fp/tsconfig.lib.json",
+              "libs/fp/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/fp/jest.config.js",
+            "tsConfig": "libs/fp/tsconfig.spec.json"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {
@@ -100,11 +133,10 @@
     "defaultCollection": "@nrwl/schematics",
     "packageManager": "yarn"
   },
-  "defaultProject": "ngrx",
   "schematics": {
     "@nrwl/schematics:library": {
       "unitTestRunner": "jest",
-      "framework": "angular"
+      "framework": "none"
     },
     "@nrwl/schematics:application": {
       "unitTestRunner": "jest",

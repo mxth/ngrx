@@ -14,7 +14,8 @@
     "paths": {
       "@mxth/ngrx": ["libs/ngrx/src/index.ts"],
       "@mxth/ui": ["libs/ui/src/index.ts"],
-      "@mxth/es": ["libs/es/src/index.ts"]
+      "@mxth/es": ["libs/es/src/index.ts"],
+      "@mxth/fp": ["libs/fp/src/index.ts"]
     },
     "module": "es2015"
   },
