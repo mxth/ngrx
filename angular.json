@@ -100,5 +100,17 @@
     "defaultCollection": "@nrwl/schematics",
     "packageManager": "yarn"
   },
-  "defaultProject": "ngrx"
+  "defaultProject": "ngrx",
+  "schematics": {
+    "@nrwl/schematics:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/schematics:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "protractor"
+    },
+    "@nrwl/schematics:node-application": {
+      "framework": "nestjs"
+    }
+  }
 }
