@@ -7,10 +7,10 @@ export enum DidMutate {
 }
 
 export function createStateOperator<V, R>(
-  mutator: (arg: R, state: EntityState<V>) => DidMutate
+  mutator: (arg: R, state: EntityState<V>) => DidMutate,
 ): EntityState<V>
 export function createStateOperator<V, R>(
-  mutator: (arg: any, state: any) => DidMutate
+  mutator: (arg: any, state: any) => DidMutate,
 ): any {
   return function operation<S extends EntityState<V>>(arg: R, state: any): S {
     const clonedEntityState: EntityState<V> = {

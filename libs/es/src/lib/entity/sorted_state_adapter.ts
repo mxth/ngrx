@@ -12,13 +12,13 @@ import { selectIdValue } from './utils'
 
 export function createSortedStateAdapter<T>(
   selectId: IdSelector<T>,
-  sort: Comparer<T>
+  sort: Comparer<T>,
 ): EntityStateAdapter<T>
 export function createSortedStateAdapter<T>(selectId: any, sort: any): any {
   type R = EntityState<T>
 
   const { removeOne, removeMany, removeAll } = createUnsortedStateAdapter(
-    selectId
+    selectId,
   )
 
   function addOneMutably(entity: T, state: R): DidMutate
@@ -29,7 +29,7 @@ export function createSortedStateAdapter<T>(selectId: any, sort: any): any {
   function addManyMutably(newModels: T[], state: R): DidMutate
   function addManyMutably(newModels: any[], state: any): DidMutate {
     const models = newModels.filter(
-      model => !(selectIdValue(model, selectId) in state.entities)
+      model => !(selectIdValue(model, selectId) in state.entities),
     )
 
     if (models.length === 0) {
@@ -117,7 +117,7 @@ export function createSortedStateAdapter<T>(selectId: any, sort: any): any {
         }
         return changes
       },
-      []
+      [],
     )
 
     return updateManyMutably(updates, state)

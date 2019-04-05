@@ -1,25 +1,25 @@
-import { Injectable, OnDestroy, Provider } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnDestroy, Provider } from '@angular/core'
+import { BehaviorSubject } from 'rxjs'
 
-import { Action } from './models';
+import { Action } from './models'
 
-export const INIT = '@ngrx/store/init' as '@ngrx/store/init';
+export const INIT = '@ngrx/store/init' as '@ngrx/store/init'
 
 @Injectable()
 export class ActionsSubject extends BehaviorSubject<Action>
   implements OnDestroy {
   constructor() {
-    super({ type: INIT });
+    super({ type: INIT })
   }
 
   next(action: Action): void {
     if (typeof action === 'undefined') {
-      throw new TypeError(`Actions must be objects`);
+      throw new TypeError(`Actions must be objects`)
     } else if (typeof action.type === 'undefined') {
-      throw new TypeError(`Actions must have a type property`);
+      throw new TypeError(`Actions must have a type property`)
     }
 
-    super.next(action);
+    super.next(action)
   }
 
   complete() {
@@ -27,8 +27,8 @@ export class ActionsSubject extends BehaviorSubject<Action>
   }
 
   ngOnDestroy() {
-    super.complete();
+    super.complete()
   }
 }
 
-export const ACTIONS_SUBJECT_PROVIDERS: Provider[] = [ActionsSubject];
+export const ACTIONS_SUBJECT_PROVIDERS: Provider[] = [ActionsSubject]

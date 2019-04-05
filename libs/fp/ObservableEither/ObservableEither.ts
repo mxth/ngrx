@@ -30,9 +30,31 @@ export function flatMapE<L, A, B>(
   )
 }
 
+export function orElse<L, M, A>(
+  fy: (l: L) => Either<M, A>,
+): OperatorFunction<Either<L, A>, Either<M, A>> {
+  return map(v => v.orElse(fy))
+}
+
 export function fold<L, A, B>(
   onLeft: (l: L) => B,
   onRight: (a: A) => B,
 ): OperatorFunction<Either<L, A>, B> {
   return map((a: Either<L, A>) => a.fold(onLeft, onRight))
+}
+
+export function getOrElse<L, A>(a: A): OperatorFunction<Either<L, A>, A> {
+  return map(v => v.getOrElse(a))
+}
+
+export function getOrElseL<L, A>(
+  f: (l: L) => A,
+): OperatorFunction<Either<L, A>, A> {
+  return map(v => v.getOrElseL(f))
+}
+
+export function mapLeft<L, M, A>(
+  f: (l: L) => M,
+): OperatorFunction<Either<L, A>, Either<M, A>> {
+  return map(v => v.mapLeft(f))
 }

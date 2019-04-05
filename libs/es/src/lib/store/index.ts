@@ -6,7 +6,7 @@ export {
   // MetaReducer,
   Selector,
   SelectorWithProps,
-} from './models';
+} from './models'
 // export { Store, select } from './store';
 // export { combineReducers, compose, createReducerFactory } from './utils';
 // export { ActionsSubject, INIT } from './actions_subject';
@@ -28,7 +28,7 @@ export {
   MemoizedSelector,
   MemoizedSelectorWithProps,
   resultMemoize,
-} from './selector';
+} from './selector'
 // export { State, StateObservable, reduceState } from './state';
 // export {
 //   INITIAL_STATE,

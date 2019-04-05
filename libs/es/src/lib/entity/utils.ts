@@ -10,7 +10,7 @@ export function selectIdValue<T>(entity: T, selectId: IdSelector<T>) {
       'The entity that was passed:',
       entity,
       'The `selectId` implementation:',
-      selectId.toString()
+      selectId.toString(),
     )
   }
 

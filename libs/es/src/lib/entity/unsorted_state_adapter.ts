@@ -10,7 +10,7 @@ import { DidMutate, createStateOperator } from './state_adapter'
 import { selectIdValue } from './utils'
 
 export function createUnsortedStateAdapter<T>(
-  selectId: IdSelector<T>
+  selectId: IdSelector<T>,
 ): EntityStateAdapter<T>
 export function createUnsortedStateAdapter<T>(selectId: IdSelector<T>): any {
   type R = EntityState<T>
@@ -59,7 +59,7 @@ export function createUnsortedStateAdapter<T>(selectId: IdSelector<T>): any {
   function removeManyMutably(predicate: Predicate<T>, state: R): DidMutate
   function removeManyMutably(
     keysOrPredicate: any[] | Predicate<T>,
-    state: any
+    state: any,
   ): DidMutate {
     const keys =
       keysOrPredicate instanceof Array
@@ -89,12 +89,12 @@ export function createUnsortedStateAdapter<T>(selectId: IdSelector<T>): any {
   function takeNewKey(
     keys: { [id: string]: string },
     update: Update<T>,
-    state: R
+    state: R,
   ): void
   function takeNewKey(
     keys: { [id: string]: any },
     update: Update<T>,
-    state: any
+    state: any,
   ): boolean {
     const original = state.entities[update.id]
     const updated: T = Object.assign({}, original, update.changes)
@@ -149,7 +149,7 @@ export function createUnsortedStateAdapter<T>(selectId: IdSelector<T>): any {
         }
         return changes
       },
-      []
+      [],
     )
     const updates = changes.filter(({ id }) => id in state.entities)
 

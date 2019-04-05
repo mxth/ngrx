@@ -13,7 +13,7 @@ export interface DictionaryNum<T> {
 }
 
 export abstract class Dictionary<T> implements DictionaryNum<T> {
-  [id: string]: T;
+  [id: string]: T
 }
 
 export interface UpdateStr<T> {
@@ -79,6 +79,6 @@ export interface EntityAdapter<T> extends EntityStateAdapter<T> {
   getInitialState<S extends object>(state: S): EntityState<T> & S
   getSelectors(): EntitySelectors<T, EntityState<T>>
   getSelectors<V>(
-    selectState: (state: V) => EntityState<T>
+    selectState: (state: V) => EntityState<T>,
   ): EntitySelectors<T, V>
 }

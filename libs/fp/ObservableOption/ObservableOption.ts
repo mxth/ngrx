@@ -1,4 +1,4 @@
-import { Predicate } from 'fp-ts/lib/function'
+import { Predicate, Refinement } from 'fp-ts/lib/function'
 import {
   Option,
   fromNullable as fromNullableO,
@@ -26,6 +26,12 @@ export function mapO<A, B>(
   return map((a: Option<A>) => a.map(f))
 }
 
+export function mapNullable<A, B>(
+  f: (a: A) => B | null | undefined,
+): OperatorFunction<Option<A>, Option<B>> {
+  return map(a => a.mapNullable(f))
+}
+
 export function getOrElse<T>(b: T): OperatorFunction<Option<T>, T> {
   return map((a: Option<T>) => a.getOrElse(b))
 }
@@ -48,4 +54,24 @@ export function flatFold<A, B>(
   onSome: (a: A) => Observable<B>,
 ): OperatorFunction<Option<A>, B> {
   return flatMap((a: Option<A>) => a.fold(b, onSome))
+}
+
+export function foldL<A, B>(
+  onNone: () => B,
+  onSome: (a: A) => B,
+): OperatorFunction<Option<A>, B> {
+  return map(a => a.foldL(onNone, onSome))
+}
+
+export function toNullable<A>(): OperatorFunction<Option<A>, A | null> {
+  return map(a => a.toNullable())
+}
+
+export function filter<A, B extends A>(
+  p: Refinement<A, B>,
+): OperatorFunction<Option<A>, Option<B>>
+export function filter<A>(
+  p: Predicate<A>,
+): OperatorFunction<Option<A>, Option<A>> {
+  return map(a => a.filter(p))
 }
