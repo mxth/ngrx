@@ -2,10 +2,22 @@ import { Predicate, Refinement } from 'fp-ts/lib/function'
 import {
   Option,
   fromNullable as fromNullableO,
-  fromPredicate as fromPredicateO,
+  fromPredicate as fromPredicateO, none, some,
 } from 'fp-ts/lib/Option'
 import { Observable, OperatorFunction, of } from 'rxjs'
 import { flatMap, map } from 'rxjs/operators'
+
+class ObservableOption<A> extends Observable<A> {
+  lift(operator) {
+    const observable = new ObservableOption<any>() //<-- important part here
+    observable.source = this
+    observable.operator = operator
+    return observable
+  }
+
+  map
+}
+
 
 export function fromNullable<T>(): OperatorFunction<
   T | null | undefined,
@@ -30,6 +42,30 @@ export function mapNullable<A, B>(
   f: (a: A) => B | null | undefined,
 ): OperatorFunction<Option<A>, Option<B>> {
   return map(a => a.mapNullable(f))
+}
+
+export function semiFlatMapO<A, B>(
+  f: (a: A) => Observable<B>
+): OperatorFunction<Option<A>, Option<B>> {
+  return flatMap(a => a.fold(
+    of(none),
+    r => f(r).pipe(map(b => some(b)))
+  ))
+}
+
+export function subFlatMapO<A, B>(
+  f: (a: A) => Option<B>,
+): OperatorFunction<Option<A>, Option<B>> {
+  return map(a => a.chain(f))
+}
+
+export function flatMapO<A, B>(
+  f: (a: A) => Observable<Option<B>>,
+): OperatorFunction<Option<A>, Option<B>> {
+  return flatMap(a => a.fold(
+    of(none),
+    r => f(r)
+  ))
 }
 
 export function getOrElse<T>(b: T): OperatorFunction<Option<T>, T> {
