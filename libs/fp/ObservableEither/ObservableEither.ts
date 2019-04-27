@@ -7,7 +7,7 @@ import {
 } from 'fp-ts/lib/Either'
 import { Predicate } from 'fp-ts/lib/function'
 import { Option } from 'fp-ts/lib/Option'
-import { Observable, OperatorFunction, of } from 'rxjs'
+import { Observable, OperatorFunction, of, isObservable } from 'rxjs'
 import { catchError, flatMap, map } from 'rxjs/operators'
 
 export function mapError<L, A>(onError: (err: any) => Observable<L>): OperatorFunction<Either<L, A>, Either<L, A>> {
@@ -79,6 +79,14 @@ export function flatOrElse<L, M, A>(
     fy,
     r => of(right(r))
   ))
+}
+
+export function fromOptionOrElse<L, A>(defaultValue: Either<L, A> | Observable<Either<L, A>>): OperatorFunction<Option<A>, Either<L, A>> {
+  return (source: Observable<Option<A>>) =>
+    source.pipe(
+      fromOption(null),
+      isObservable(defaultValue) ? flatOrElse(() => defaultValue) : orElse(() => defaultValue)
+    )
 }
 
 export function fold<L, A, B>(

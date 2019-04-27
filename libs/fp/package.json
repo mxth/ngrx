@@ -1,6 +1,6 @@
 {
   "name": "@mxth/fp",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "peerDependencies": {
     "rxjs": "^6.3.0",
     "fp-ts": "^1.14.0"
