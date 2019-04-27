@@ -1,4 +1,4 @@
-import { Predicate, Refinement } from 'fp-ts/lib/function'
+import { Predicate, Refinement, Lazy } from 'fp-ts/lib/function'
 import {
   Option,
   fromNullable as fromNullableO,
@@ -6,18 +6,6 @@ import {
 } from 'fp-ts/lib/Option'
 import { Observable, OperatorFunction, of } from 'rxjs'
 import { flatMap, map } from 'rxjs/operators'
-
-class ObservableOption<A> extends Observable<A> {
-  lift(operator) {
-    const observable = new ObservableOption<any>() //<-- important part here
-    observable.source = this
-    observable.operator = operator
-    return observable
-  }
-
-  map
-}
-
 
 export function fromNullable<T>(): OperatorFunction<
   T | null | undefined,
@@ -76,6 +64,17 @@ export function flatGetOrElse<T>(
   b: Observable<T>,
 ): OperatorFunction<Option<T>, T> {
   return flatMap((a: Option<T>) => a.fold(b, _a => of(_a)))
+}
+
+export function orElse<A>(fa: Lazy<Option<A>>): OperatorFunction<Option<A>, Option<A>> {
+  return map((a: Option<A>) => a.orElse(fa))
+}
+
+export function flatOrElse<A>(fa: () => Observable<Option<A>>): OperatorFunction<Option<A>, Option<A>> {
+  return flatMap((a: Option<A>) => a.fold(
+    fa(),
+    _a => of(some(_a))
+  ))
 }
 
 export function fold<A, B>(
