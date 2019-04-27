@@ -2,10 +2,12 @@ import { Predicate, Refinement, Lazy } from 'fp-ts/lib/function'
 import {
   Option,
   fromNullable as fromNullableO,
+  fromEither as fromEitherO,
   fromPredicate as fromPredicateO, none, some,
 } from 'fp-ts/lib/Option'
 import { Observable, OperatorFunction, of } from 'rxjs'
 import { flatMap, map } from 'rxjs/operators'
+import { Either } from 'fp-ts/lib/Either'
 
 export function fromNullable<T>(): OperatorFunction<
   T | null | undefined,
@@ -18,6 +20,10 @@ export function fromPredicate<A>(
   predicate: Predicate<A>,
 ): OperatorFunction<A, Option<A>> {
   return map(fromPredicateO(predicate))
+}
+
+export function fromEither<L, A>(): OperatorFunction<Either<L, A>, Option<A>> {
+  return map(fromEitherO)
 }
 
 export function mapO<A, B>(
