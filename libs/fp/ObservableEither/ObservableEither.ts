@@ -72,6 +72,15 @@ export function orElse<L, M, A>(
   return map(v => v.orElse(fy))
 }
 
+export function flatOrElse<L, M, A>(
+  fy: (l: L) => Observable<Either<M, A>>,
+): OperatorFunction<Either<L, A>, Either<M, A>> {
+  return flatMap(v => v.fold(
+    fy,
+    r => of(right(r))
+  ))
+}
+
 export function fold<L, A, B>(
   onLeft: (l: L) => B,
   onRight: (a: A) => B,
