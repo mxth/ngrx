@@ -1,13 +1,13 @@
-import { Predicate, Refinement, Lazy } from 'fp-ts/lib/function'
+import { Either } from 'fp-ts/lib/Either'
+import { Lazy, Predicate, Refinement } from 'fp-ts/lib/function'
 import {
   Option,
-  fromNullable as fromNullableO,
   fromEither as fromEitherO,
+  fromNullable as fromNullableO,
   fromPredicate as fromPredicateO, none, some,
 } from 'fp-ts/lib/Option'
 import { Observable, OperatorFunction, of } from 'rxjs'
 import { flatMap, map } from 'rxjs/operators'
-import { Either } from 'fp-ts/lib/Either'
 
 export function fromNullable<T>(): OperatorFunction<
   T | null | undefined,
