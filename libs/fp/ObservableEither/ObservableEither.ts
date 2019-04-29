@@ -36,36 +36,6 @@ export function fromOption<L, A>(defaultValue: L): OperatorFunction<Option<A>, E
   return map(fromOptionE(defaultValue))
 }
 
-export function mapE<L, A, B>(
-  f: (a: A) => B,
-): OperatorFunction<Either<L, A>, Either<L, B>> {
-  return map((a: Either<L, A>) => a.map(f))
-}
-
-export function semiFlatMapE<L, A, B>(
-  f: (a: A) => Observable<B>,
-): OperatorFunction<Either<L, A>, Either<L, B>> {
-  return flatMap(
-    (a: Either<L, A>): Observable<Either<L, B>> =>
-      a.fold(l => of(left(l)), r => f(r).pipe(map(b => right(b)))),
-  )
-}
-
-export function subFlatMapE<L, A, B>(
-  f: (a: A) => Either<L, B>,
-): OperatorFunction<Either<L, A>, Either<L, B>> {
-  return map(a => a.chain(f))
-}
-
-export function flatMapE<L, A, B>(
-  f: (a: A) => Observable<Either<L, B>>,
-): OperatorFunction<Either<L, A>, Either<L, B>> {
-  return flatMap(a => a.fold(
-    l => of(left<L, B>(l)),
-    r => f(r)
-  ))
-}
-
 export function orElse<L, M, A>(
   fy: (l: L) => Either<M, A>,
 ): OperatorFunction<Either<L, A>, Either<M, A>> {

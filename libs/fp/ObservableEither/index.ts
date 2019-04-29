@@ -1,1 +1,5 @@
+export * from './flatMapE'
+export * from './mapE'
+export * from './mapToE'
 export * from './ObservableEither'
+export * from './withLatestFromE'
