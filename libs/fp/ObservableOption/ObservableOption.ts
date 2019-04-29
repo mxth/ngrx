@@ -6,7 +6,7 @@ import {
   fromNullable as fromNullableO,
   fromPredicate as fromPredicateO, none, some,
 } from 'fp-ts/lib/Option'
-import { Observable, OperatorFunction, of } from 'rxjs'
+import { Observable, OperatorFunction, of, throwError } from 'rxjs'
 import { flatMap, map } from 'rxjs/operators'
 
 export function fromNullable<T>(): OperatorFunction<
@@ -70,6 +70,10 @@ export function flatGetOrElse<T>(
   b: Observable<T>,
 ): OperatorFunction<Option<T>, T> {
   return flatMap((a: Option<T>) => a.fold(b, _a => of(_a)))
+}
+
+export function getOrThrow<T>(error: any): OperatorFunction<Option<T>, T> {
+  return flatGetOrElse(throwError(error))
 }
 
 export function orElse<A>(fa: Lazy<Option<A>>): OperatorFunction<Option<A>, Option<A>> {
