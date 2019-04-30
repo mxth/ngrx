@@ -1,4 +1,5 @@
 export * from './flatMapE'
+export * from './fromOptionOrEither'
 export * from './mapE'
 export * from './mapToE'
 export * from './ObservableEither'
