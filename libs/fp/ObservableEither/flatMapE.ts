@@ -3,7 +3,7 @@ import { Observable, OperatorFunction, of } from 'rxjs'
 import { flatMap, map } from 'rxjs/operators'
 
 export function semiFlatMapE<L, A, B>(
-  f: (a: A) => Observable<B>,
+  f: (a: A) => Observable<B | never>,
 ): OperatorFunction<Either<L, A>, Either<L, B>> {
   return flatMap(
     (a: Either<L, A>): Observable<Either<L, B>> =>
